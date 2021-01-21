@@ -3,7 +3,8 @@
 
 //variables para otras cosas del programa
 int acc;
-char tareas[100,10], cont, cont2;
+char tareas[100][10];
+int cont, cont2;
 
 //variables para los whiles xd
 char continuar, continuar2, continuar3;
@@ -15,8 +16,8 @@ int main(){
 	continuar='s';
 	
 	while (continuar=='s'){
-		std::cout<<"bienvenido a trello "<<endl;
-		td::cout<<"\n---------------------------------\n";
+		std::cout<<"bienvenido a trello \n";
+		std::cout<<"\n---------------------------------\n";
 		std::cout<<"1- añadir una nueva tarea \n";
 		std::cout<<"2- ver progresión de la tareas \n";
 		std::cout<<"3- ver tareas completadas \n";
@@ -29,7 +30,7 @@ int main(){
 			system("cls");
 			std::cout<<"ha ingresado un digito erroneo\n";
 			getch();
-			std::cout<<"bienvenido a trello "<<endl;
+			std::cout<<"bienvenido a trello \n";
 			std::cout<<"\n---------------------------------\n";
 			std::cout<<"1- añadir una nueva tarea \n";
 			std::cout<<"2- ver progresión de la tareas \n";
@@ -80,6 +81,6 @@ char uno(int contador){
 	
 	std::cout<<"ingrese su nueva tarea: ";
 	std::cin>>tarea;
-	tareas[cont,0]=tarea;
+	tareas[cont][0]=tarea;
 	return 0;
 }
