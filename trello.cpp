@@ -4,7 +4,7 @@
 
 //variables para otras cosas del programa
 int acc;
-char tareas[100][10][1];
+char tareas[99][10];
 int aux[100][2];
 int cont, cont2;
 
@@ -16,6 +16,7 @@ void inicio();
 void uno(int contador);
 void subtarea(int contador1, int contador2);
 void vertareas();
+void progresionn_part_1();
 
 int main(){
 	continuar='s';
@@ -89,27 +90,34 @@ void uno(int contador){
 	char tarea[30];
 	
 	std::cout<<"ingrese su nueva tarea: ";
-	std::cin>>tarea;
-	tareas[cont][0][0]=tarea[30];
+	std::cin.getline(tarea,30,'\n');
+	tareas[cont][0]=tarea[30];
 }
 
 void subtarea(int contador1, int contador2){
 	char sub_tarea[30];
 	
 	std::cout<<"ingrese la subtarea: ";
-	std::cin>>sub_tarea;
-	tareas[cont][cont2][0]=sub_tarea[30];
+	std::cin.getline(sub_tarea,30,'\n');
+	tareas[cont][cont2]=sub_tarea[30];
 }
 
 void vertareas(){
 	std::cout<<"Lista de tareas: ";
 	for (int x=0; x<=cont; x++){
-		std::cout<<x<"- "<<tareas[x][0][0];
-		
+		std::cout<<"\n"<<x+1<<"- "<<tareas[x][0]<<"\n\n";
 		for (int y=1; y<=aux[cont][0]; y++){
-			std::cout<<y<<"- "<<tareas[x][y][0];
+			std::cout<<"  "<<x+1<<"."<<y<<" -> "<<tareas[x][y]<<"\n";
 		}
 	}
 	getch();
 }
 
+void progresionn_part_1(){
+	std::cout<<"realizar progresión de tarea\n";
+	std::cout<<"\n";
+	
+	for(int e=0; e<=cont; e++){
+		std::cout<<e<<"- "<<tareas[e][0];
+	}
+}
