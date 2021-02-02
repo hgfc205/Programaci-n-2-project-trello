@@ -2,18 +2,20 @@
 #include <conio.h>
 #include <string.h>
 
+using namespace std;
+
 //variables
 int opcion, cont1=0, cont2;
-char tareas[20][10], tarea[20], subtarea[20];
+string tareas[20][10];
 
 //prototipos de funciones
 void menu();
-void agregartarea(int contador1, char tarea_agregada);
-void agregarsubtarea(int contador1, int contador2, char subtarea_agregada);
+void agregartarea(int contador1, int contador2, string arraydetarea);
+void agregarsubtarea(int contador1, int contador2, string arraydetarea);
+void vertareas(int contador1, int contador2);
 
 int main(){
 	int A=1;
-	int B=1;
 	
 	while(A==1){
 		system("cls");
@@ -22,32 +24,20 @@ int main(){
 		
 		if(opcion>3){
 			system("cls");
-			std::cout<<"Se ha equivocado de digito\n";
-			std::cout<<"Por favor pruebe a ingresar el digito correcto\n";
+			cout<<"Se ha equivocado de digito\n";
+			cout<<"Por favor pruebe a ingresar el digito correcto\n";
 			getch();
 		} else{
 			system("cls");
 			switch(opcion){
 				case 1:
-					std::cin.ignore();
-					std::cout<<"Ingrese su tarea: ";
-					std::cin.getline(tarea,20,'\n');
-					
-					agregartarea(cont1, tarea[20]);
-					
-					while((B!=2) and (cont2<=10)){
-						system("cls");
-						std::cout<<"Ingrese su subtarea: ";
-						std::cin.getline(subtarea,20,'\n');
-						agregarsubtarea(cont1,cont2,subtarea[20]);
-						std::cout<<"\n \n";
-						std::cout<<"Desea agregar otra subtarea? ";
-						std::cin>>B;
-					}
+					cin.ignore();
+					agregartarea(cont1, cont2, tareas[0][0]);
 				break;
 				
 				case 2:
-					
+					cout<<"LISTA DE TAREAS: \n";
+					vertareas(cont1, cont2);
 				break;
 			}
 		}
@@ -56,24 +46,41 @@ int main(){
 }
 
 void menu(){
-	std::cout<<"Bienvenido "<<"\n";
-	std::cout<<"\n \n";
-	std::cout<<"OPCIONES A REALIZAR: \n";
-	std::cout<<"1-> Agregar una nueva tarea"<<"\n";
-	std::cout<<"2-> Ver lista de tareas"<<"\n";
-	std::cout<<"3-> Realizar un avance en una tarea"<<"\n";
-	std::cout<<"\n";
-	std::cout<<"Digite su opcion a realizar: ";
+	cout<<"Bienvenido "<<"\n";
+	cout<<"\n \n";
+	cout<<"OPCIONES A REALIZAR: \n";
+	cout<<"1-> Agregar una nueva tarea"<<"\n";
+	cout<<"2-> Ver lista de tareas"<<"\n";
+	cout<<"3-> Realizar un avance en una tarea"<<"\n";
+	cout<<"\n";
+	cout<<"Digite su opcion a realizar: ";
 }
 
-void agregartarea(int contador1, char tarea_agregada){
-	tareas[contador1][0]=tarea_agregada;
+void agregartarea(int contador1, int contador2, string arraydetarea){
+	cout<<"ingrese su tarea: ";
+	getline(cin,tareas[contador1][0]);
 	cont1++;
+	agregarsubtarea(cont1, cont2, tareas[0][0]);
+}
+
+void agregarsubtarea(int contador1, int contador2, string arraydetarea){
+	int B=1;
 	cont2=1;
+	
+	while((B!=2) and (cont2<=10)){
+		system("cls");
+		cout<<"ingrese su subtarea: ";
+		getline(cin, tareas[contador1][contador2]);
+		cont2++;
+		cout<<"\n";
+		cout<<"desea agregar otra subtarea? (1=si y 2=no) ";
+		cin>>B;
+	}
 }
 
-void agregarsubtarea(int contador1, int contador2, char subtarea_agregada){
-	tareas[contador1][contador2]=subtarea_agregada;
-	cont2++;
+void vertareas(int contador1, int contador2){
+	for(int i=0; i<=cont1; i++){
+		cout<<i+1<<"- "<<tareas[cont1][0]<<"\n";
+	}
+	getch();
 }
-
