@@ -6,7 +6,8 @@ using namespace std;
 
 //variables
 int opcion, cont1=0, cont2;
-string tareas[20][10];
+string tareas[20][11];
+int num[20][20];
 
 //prototipos de funciones
 void menu();
@@ -32,12 +33,12 @@ int main(){
 			switch(opcion){
 				case 1:
 					cin.ignore();
-					agregartarea(cont1, cont2, tareas[0][0]);
+					agregartarea(cont1,cont2,tareas[0][0]);
 				break;
-				
 				case 2:
 					cout<<"LISTA DE TAREAS: \n";
-					vertareas(cont1, cont2);
+					cout<<"\n";
+					vertareas(cont1,cont2);
 				break;
 			}
 		}
@@ -58,29 +59,37 @@ void menu(){
 
 void agregartarea(int contador1, int contador2, string arraydetarea){
 	cout<<"ingrese su tarea: ";
-	getline(cin,tareas[contador1][0]);
-	cont1++;
-	agregarsubtarea(cont1, cont2, tareas[0][0]);
+	getline(cin,tareas[cont1][0]);
+	agregarsubtarea(cont1,cont2,tareas[0][0]);
 }
 
 void agregarsubtarea(int contador1, int contador2, string arraydetarea){
 	int B=1;
 	cont2=1;
-	
-	while((B!=2) and (cont2<=10)){
+	while((B!=2)and(cont2<=10)){
 		system("cls");
 		cout<<"ingrese su subtarea: ";
-		getline(cin, tareas[contador1][contador2]);
+		getline(cin,tareas[cont1][cont2]);
 		cont2++;
-		cout<<"\n";
-		cout<<"desea agregar otra subtarea? (1=si y 2=no) ";
+		cout<<"\ndesea agregar otra subtarea? (1=si y 2=no) ";
 		cin>>B;
 	}
+	num[cont1][0]=cont2;
+	cont1++;
 }
 
 void vertareas(int contador1, int contador2){
-	for(int i=0; i<=cont1; i++){
-		cout<<i+1<<"- "<<tareas[cont1][0]<<"\n";
+	int x=0,y=1;
+	
+	while(x<cont1){
+		cout<<x+1<<"- "<<tareas[x][0]<<endl;
+		while(y<num[x][0]){
+			cout<<x+1<<"."<<y<<"- "<<tareas[x][y]<<endl;
+			y++;
+		}
+		cout<<endl;
+		x++;
+		y=1;
 	}
 	getch();
 }
