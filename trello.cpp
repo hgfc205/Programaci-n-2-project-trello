@@ -14,6 +14,7 @@ void menu();
 void agregartarea(int contador1, int contador2, string arraydetarea);
 void agregarsubtarea(int contador1, int contador2, string arraydetarea);
 void vertareas(int contador1, int contador2);
+void progreso(int contador1, string arraydetarea);
 
 int main(){
 	int A=1;
@@ -36,9 +37,12 @@ int main(){
 					agregartarea(cont1,cont2,tareas[0][0]);
 				break;
 				case 2:
-					cout<<"LISTA DE TAREAS: \n";
-					cout<<"\n";
+					cout<<"LISTA DE TAREAS:"<<endl;
 					vertareas(cont1,cont2);
+				break;
+				case 3:
+					cout<<"ELIJA LA TAREA PARA REALIZAR EL PROGRESO"<<endl;
+					
 				break;
 			}
 		}
@@ -68,6 +72,9 @@ void agregarsubtarea(int contador1, int contador2, string arraydetarea){
 	cont2=1;
 	while((B!=2)and(cont2<=10)){
 		system("cls");
+		if(cont2>1){
+			cin.ignore();
+		}
 		cout<<"ingrese su subtarea: ";
 		getline(cin,tareas[cont1][cont2]);
 		cont2++;
@@ -93,3 +100,34 @@ void vertareas(int contador1, int contador2){
 	}
 	getch();
 }
+
+void progreso(int contador1, string arraydetarea){
+	int num_tarea, n, k, aux;
+	for(int z=0; z<cont1; z++){
+		cout<<z+1<<"- "<<tareas[z][0]<<endl;
+	}
+	cout<<endl<<"Digite el numero de la tarea: ";
+	cin>>num_tarea;
+	aux=num_tarea-1;
+	system("cls");
+	cout<<endl<<"TAREA:"<<endl;
+	
+	n=0;
+	k=1;
+	while(n>0){
+		cout<<tareas[num_tarea][0]<<endl<<endl;
+		while(k<num[num_tarea][k]){
+			cout<<k<<tareas[num_tarea][k]<<endl;
+			k++;
+		}
+		n=1;
+	}
+	
+	cout<<"Digite el numero de la subtarea: ";
+	cin>>num_tarea;
+	num[aux][1]++;
+	
+	cout<<"Acción realizada con exito";
+	getch();
+}
+
