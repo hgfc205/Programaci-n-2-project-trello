@@ -7,14 +7,15 @@ using namespace std;
 //variables
 int opcion, cont1=0, cont2;
 string tareas[20][11];
-int num[20][20];
+int num[20][2], aux2[20][10];
+float porcent;
 
 //prototipos de funciones
 void menu();
 void agregartarea(int contador1, int contador2, string arraydetarea);
 void agregarsubtarea(int contador1, int contador2, string arraydetarea);
 void vertareas(int contador1, int contador2);
-void progreso(int contador1, string arraydetarea);
+void progreso();
 
 int main(){
 	int A=1;
@@ -42,7 +43,7 @@ int main(){
 				break;
 				case 3:
 					cout<<"ELIJA LA TAREA PARA REALIZAR EL PROGRESO"<<endl;
-					
+					progreso();
 				break;
 			}
 		}
@@ -81,6 +82,10 @@ void agregarsubtarea(int contador1, int contador2, string arraydetarea){
 		cout<<"\ndesea agregar otra subtarea? (1=si y 2=no) ";
 		cin>>B;
 	}
+	
+	if(cont2>10){
+		cont2=10;
+	}
 	num[cont1][0]=cont2;
 	cont1++;
 }
@@ -94,6 +99,8 @@ void vertareas(int contador1, int contador2){
 			cout<<x+1<<"."<<y<<"- "<<tareas[x][y]<<endl;
 			y++;
 		}
+		porcent=(num[x][1]/num[x][0])*100;
+		cout<<"porcentaje: "<<porcent<<"%"<<endl;
 		cout<<endl;
 		x++;
 		y=1;
@@ -101,8 +108,8 @@ void vertareas(int contador1, int contador2){
 	getch();
 }
 
-void progreso(int contador1, string arraydetarea){
-	int num_tarea, n, k, aux;
+void progreso(){
+	int num_tarea, k, aux;
 	for(int z=0; z<cont1; z++){
 		cout<<z+1<<"- "<<tareas[z][0]<<endl;
 	}
@@ -110,24 +117,32 @@ void progreso(int contador1, string arraydetarea){
 	cin>>num_tarea;
 	aux=num_tarea-1;
 	system("cls");
-	cout<<endl<<"TAREA:"<<endl;
+	cout<<endl<<"TAREA: "<<tareas[aux][0]<<endl;
+	cout<<"Lista de subtareas: "<<endl;
 	
-	n=0;
 	k=1;
-	while(n>0){
-		cout<<tareas[num_tarea][0]<<endl<<endl;
-		while(k<num[num_tarea][k]){
-			cout<<k<<tareas[num_tarea][k]<<endl;
-			k++;
+	while(k<=num[aux][0]-1){
+		cout<<k<<"- "<<tareas[aux][k];
+		if(aux2[aux][k-1]>0){
+			cout<<"  ->  Completada"<<endl;
+		} else{
+			cout<<"  ->  Pendiente"<<endl;
 		}
-		n=1;
+		k++;
 	}
 	
-	cout<<"Digite el numero de la subtarea: ";
+	cout<<endl<<"Digite el numero de la subtarea: ";
 	cin>>num_tarea;
-	num[aux][1]++;
 	
-	cout<<"Acción realizada con exito";
+	if(num[aux][1]<num[aux][0]-1){
+		num[aux][1]++;
+		aux2[aux][num_tarea-1]++;
+		cout<<"Acción realizada con exito";
+	}else{
+		cout<<"accion interrumpida"<<endl;
+		cout<<"excede el numero de subtareas que se agregaron en la lista";
+	}
+	
 	getch();
 }
 
