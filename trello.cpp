@@ -96,11 +96,18 @@ void vertareas(int contador1, int contador2){
 	while(x<cont1){
 		cout<<x+1<<"- "<<tareas[x][0]<<endl;
 		while(y<num[x][0]){
-			cout<<x+1<<"."<<y<<"- "<<tareas[x][y]<<endl;
+			cout<<x+1<<"."<<y<<"- "<<tareas[x][y];
+			if(aux2[x][y-1]>0){
+				cout<<"  ->  Completada"<<endl;
+			} else{
+				cout<<"  ->  Pendiente"<<endl;
+			}
 			y++;
 		}
-		porcent=(num[x][1]/num[x][0])*100;
-		cout<<"porcentaje: "<<porcent<<"%"<<endl;
+		
+		int ayuda=num[x][0]-1;
+		porcent=(num[x][1]*100)/ayuda;
+		cout<<endl<<"porcentaje: "<<porcent<<"%"<<endl;
 		cout<<endl;
 		x++;
 		y=1;
